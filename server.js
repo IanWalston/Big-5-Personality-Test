@@ -3,6 +3,7 @@
 var express = require("express");
 var path = require("path");
 let scoring = require("./scoring.js");
+let questions = require("./questions.js");
 
 // Sets up the Express App
 // =============================================================
@@ -14,18 +15,21 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "index.html"));
-  });
+  res.sendFile(path.join(__dirname, "index.html"));
 
-  app.get("/score/:score", function(req, res) {
-    var score = req.params.score;
-    console.log(scoring.score(score))
-    return res.json(false);
-  });
+});
+app.get("/test.json", function(req, res) {
+  res.json(questions)
+});
+app.get("/score/:score", function(req, res) {
+  var score = req.params.score;
+  console.log(scoring.score(score));
+  return res.json(false);
+});
 
-  // Starts the server to begin listening
+// Starts the server to begin listening
 // =============================================================
 app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
-  });
-  
+  console.log("App listening on PORT " + PORT);
+});
+
