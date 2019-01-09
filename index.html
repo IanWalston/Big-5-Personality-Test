@@ -24,12 +24,21 @@
 
     <script type="text/javascript">
       let question_list = [];
-      let answers = {};
+      let answers = [];
+      let scorearray = [];
 
       //get the test
       $.get("/test.json", function(data) {
         $("#display").append(
-          `<button onclick="console.log(answers)">submit</button>`
+          $("<button>").on("click", () => {
+            //this is where we turn the answers object into a string, then make a request to the server to score our test
+            score_string = answers.join(",").slice(1, -2);
+            console.log(score_string.length);
+
+            $.get("/score/" + score_string, function(data) {
+              console.log(data);
+            });
+          })
         );
 
         // console.log(data)
@@ -59,12 +68,12 @@
     <label class="radio-inline">
       <input type="radio" name="optradio" onclick="(${rev})?answers[${num}] = 1:answers[${num}] = 5">Very Accurate
     </label>
-  </form>`).append("<br>");
-
-
+  </form>`
+            )
+            .append("<br>");
 
           //setting default answer to neutral in the answer object
-          answers[num] = 3;
+          answers[num.slice(0, -1)] = 3;
         });
       });
 

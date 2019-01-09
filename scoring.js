@@ -4,7 +4,7 @@ let questions = require("./questions.js");
 const scoreTest = score => {
   const quarr = questions.questions;
 
-  const newquarr = quarr
+  const newquarr = quarr;
   const scorearray = score.split(",");
   //assign each question in array a score value
   for (let index = 0; index < scorearray.length; index++) {
@@ -41,8 +41,8 @@ const scoreTest = score => {
   return userScore;
 };
 
-// const samplescore =
-//   "1,4,0,1,2,3,0,4,4,0,4,3,3,0,2,4,3,3,1,0,4,1,1,0,2,1,2,4,1,0,3,2,0,0,3,2,4,0,2,3,4,1,3,3,4,4,1,3,1,2";
-// console.log(scoreTest(samplescore));
+const samplescore =
+  "1,4,0,1,2,3,0,4,4,0,4,3,3,0,2,4,3,3,1,0,4,1,1,0,2,1,2,4,1,0,3,2,0,0,3,2,4,0,2,3,4,1,3,3,4,4,1,3,1,2";
+console.log(scoreTest(samplescore));
 
-exports.score =  scoreTest;
+exports.score = scoreTest;

@@ -16,15 +16,14 @@ app.use(express.json());
 
 app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname, "index.html"));
-
 });
 app.get("/test.json", function(req, res) {
-  res.json(questions)
+  res.json(questions);
 });
 app.get("/score/:score", function(req, res) {
   var score = req.params.score;
   console.log(scoring.score(score));
-  return res.json(false);
+  return res.json(scoring.score(score));
 });
 
 // Starts the server to begin listening
@@ -32,4 +31,3 @@ app.get("/score/:score", function(req, res) {
 app.listen(PORT, function() {
   console.log("App listening on PORT " + PORT);
 });
-
