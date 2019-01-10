@@ -24,5 +24,6 @@ const testuserscore = {
 };
 
 const scorematch = (userscore, samplescores) => {
-  userscore;
+    console.log(userscores)
+    console.log(samplecores)
 };
