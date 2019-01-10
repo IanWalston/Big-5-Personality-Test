@@ -1,4 +1,4 @@
-let questions = require("./questions.js");
+let questions = require("./data/questions.js");
 
 //function for scoring the test
 const scoreTest = score => {
@@ -37,6 +37,11 @@ const scoreTest = score => {
           "ERROR: There was a problem with one of the scores. The results will be flawed."
         );
   });
+
+  for (let key in userScore) {
+    //divide by 10 to get the mean
+    userScore[key] /= 10;
+  }
 
   return userScore;
 };
