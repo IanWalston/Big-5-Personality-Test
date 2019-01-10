@@ -1,0 +1,55 @@
+.radio-inline {
+    margin: auto;
+    min-height: 40px;
+  }
+  .radio-inline:hover{
+    background-color: skyblue;
+  }
+  .radio-inline:active {
+    animation-name: flash;
+    animation-duration: 1s;
+  }
+  .row:hover {
+    background-color: lightblue;
+  }
+  .col-md-1 {
+    text-align: center;
+  }
+  .canvasjs.chart-credit{
+    z-index: -1;
+    opacity: 0;
+  }
+  .showsmall {
+    position: fixed;
+    z-index: -1;
+    opacity: 0;
+  }
+  .hidesmall {
+    opacity: 1;
+  }
+  @keyframes flash {
+    50% {
+      background-color: blue;
+    }
+    100% {
+      background-color: none;
+    }
+  }
+  @media only screen and (device-width: 768px),
+    only screen and (max-width: 768px) {
+    .showsmall {
+      position: static;
+      z-index: 1;
+      opacity: 1;
+      margin: 1em;
+      padding: auto;
+    }
+    .hidesmall {
+      position: fixed;
+    z-index: -1;
+    opacity: 0;
+    }
+    .col-md-1 {
+      text-align: left;
+    }
+  }

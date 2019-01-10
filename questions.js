@@ -301,4 +301,4 @@ questionsArray = [
   }
 ];
 
-exports.questions =  questionsArray;
+exports.questions = questionsArray;
