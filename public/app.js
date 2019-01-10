@@ -168,8 +168,8 @@ $.get("/test.json", function(data) {
             .html(item)
         );
       });
-      row.addClass("row rounded")
-      display.append(row)
+      row.addClass("row rounded");
+      display.append(row);
     }
     i++;
   });
@@ -193,7 +193,7 @@ $.get("/test.json", function(data) {
               console.log(data);
 
               //canvasjs paint chart of 5 Factor score
-              const chart = new CanvasJS.Chart("chartdisplay", {
+              const userchart = new CanvasJS.Chart("userchartdisplay", {
                 animationEnabled: true,
 
                 title: {
@@ -203,6 +203,8 @@ $.get("/test.json", function(data) {
                   interval: 1
                 },
                 axisY2: {
+                  minimum: 1,
+                  maximum: 5,
                   interlacedColor: "rgba(1,77,101,.2)",
                   gridColor: "rgba(1,77,101,.1)",
                   title: "Score"
@@ -214,27 +216,84 @@ $.get("/test.json", function(data) {
                     axisYType: "secondary",
                     color: "#014D65",
                     dataPoints: [
-                      { y: data.Extraversion, label: "Extraversion" },
-                      { y: data.Agreeableness, label: "Agreeableness" },
-                      { y: data.Conscientiousness, label: "Conscientiousness" },
+                      { y: data.score.Extraversion, label: "Extraversion" },
+                      { y: data.score.Agreeableness, label: "Agreeableness" },
                       {
-                        y: data.Emotional_Stability,
+                        y: data.score.Conscientiousness,
+                        label: "Conscientiousness"
+                      },
+                      {
+                        y: data.score.Emotional_Stability,
                         label: "Emotional Stability"
                       },
-                      { y: data.Intellect, label: "Intellect" }
+                      { y: data.score.Intellect, label: "Intellect" }
                     ]
                   }
                 ]
               });
-              chart.render();
+              userchart.render();
               $(".canvasjs-chart-credit")
                 .css("z-index", "-1")
                 .css("opacity", "0");
+              //end of chart
+
+              //canvasjs paint chart of 5 Factor score
+              const animalchart = new CanvasJS.Chart("animalchartdisplay", {
+                animationEnabled: true,
+
+                title: {
+                  text: `${data.match.match.name} 5 Factor Personality Score`
+                },
+                axisX: {
+                  interval: 1
+                },
+                axisY2: {
+                  minimum: 1,
+                  maximum: 5,
+                  interlacedColor: "rgba(1,77,101,.2)",
+                  gridColor: "rgba(1,77,101,.1)",
+                  title: "Score"
+                },
+                data: [
+                  {
+                    type: "bar",
+                    name: "score",
+                    axisYType: "secondary",
+                    color: "#014D65",
+                    dataPoints: [
+                      {
+                        y: data.match.match.Extraversion,
+                        label: "Extraversion"
+                      },
+                      {
+                        y: data.match.match.Agreeableness,
+                        label: "Agreeableness"
+                      },
+                      {
+                        y: data.match.match.Conscientiousness,
+                        label: "Conscientiousness"
+                      },
+                      {
+                        y: data.match.match.Emotional_Stability,
+                        label: "Emotional Stability"
+                      },
+                      { y: data.match.match.Intellect, label: "Intellect" }
+                    ]
+                  }
+                ]
+              });
+              animalchart.render();
+              $(".canvasjs-chart-credit")
+                .css("z-index", "-1")
+                .css("opacity", "0");
+              //end of chart
+
               display.append(
                 $("<div>")
-                  .html("animal match information will go here")
+                  .html(`animal match information will go here: ${data.match}`)
                   .css("margin-top", "400px")
               );
+              console.log(data.match);
             });
           })
       )

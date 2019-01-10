@@ -1,19 +1,10 @@
-const animalscores = require("./data/animalscores.js")
+const animalscores = require("./data/animalscores.js").data;
 
 //shorthand for squaring
 const sq = x => {
-  return Math.pow(x, 2);
+  const answer = Math.pow(x, 2);
+  return answer;
 };
-
-//this function will use a 5 dimensional pythagorean theorumn to determine the 'distance' between a pair of 5 factor test scores
-const pythag5 = (arr1, arr2) => {
-  const [q, w, e, r, t] = arr1;
-  const [a, s, d, f, g] = arr2;
-  return Math.sqrt(sq(q - a) + sq(w - s) + sq(e - d) + sq(r - f) + sq(t - g));
-};
-
-//the 5D distance here should be 5
-console.log(pythag5([1, 2, 1, 2, 1], [2, 2, 3, 4, 5]) == 5);
 
 const testuserscore = {
   Agreeableness: 3,
@@ -24,6 +15,52 @@ const testuserscore = {
 };
 
 const scorematch = (userscore, samplescores) => {
-    console.log(userscores)
-    console.log(samplecores)
+  const distances = [];
+
+  samplescores.forEach(animalscore => {
+    arr = [
+      "Extraversion",
+      "Conscientiousness",
+      "Emotional_Stability",
+      "Agreeableness",
+      "Intellect"
+    ];
+
+    //iterating through a factors array, with one userscore, and one animalscore
+    let sum = 0;
+    arr.forEach(item => {
+      //summing each diffsquared
+      sum += sq(userscore[item] - animalscore[item]);
+    });
+
+    //squarerooting sum of diffsquareds
+    distance = Math.sqrt(sum);
+
+    distobj = {
+      distance: distance,
+      matchedAnimal: animalscore
+    };
+    distances.push(distobj);
+  });
+
+  const report = {};
+  
+  distances.sort((a, b) => {
+    return a.distance - b.distance;
+  })[0].matchedAnimal;
+
+  report.match = distances[0].matchedAnimal
+  report.distance = distances[0].distance
+
+  return report;
 };
+
+//TEST
+
+console.log(
+  "animalmatch.js lion test: ",
+  scorematch(testuserscore, animalscores)
+);
+
+//exporting function
+exports.match = scorematch;
