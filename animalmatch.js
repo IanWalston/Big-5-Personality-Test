@@ -44,13 +44,13 @@ const scorematch = (userscore, samplescores) => {
   });
 
   const report = {};
-  
+
   distances.sort((a, b) => {
     return a.distance - b.distance;
   })[0].matchedAnimal;
 
-  report.match = distances[0].matchedAnimal
-  report.distance = distances[0].distance
+  report.match = distances[0].matchedAnimal;
+  report.distance = distances[0].distance;
 
   return report;
 };

@@ -4,11 +4,11 @@ const answers = [];
 $.get("/test.json", function(data) {
   const question_list = data.questions;
   const display = $("#display");
-  const row = $("<div>").addClass("row rounded");
+  const row = $("<div>").addClass("row hidesmall fixed");
 
   //some style for display
   display
-    .addClass("rounded border p-4 m-2")
+    .addClass("rounded border border-dark p-4 m-2")
     .css("background-color", "lightgrey");
 
   //rend the word questions in the DOM
@@ -29,7 +29,7 @@ $.get("/test.json", function(data) {
     row.append(
       $("<label>")
         .addClass("col-md-1 radio-inline hidesmall")
-        .html(item)
+        .append($("<p>").html(item))
     );
   });
 
@@ -60,6 +60,7 @@ $.get("/test.json", function(data) {
       //append radio 1
       $("<label>")
         .addClass("col-md-1 radio-inline rounded")
+        .attr("onclick", `$(this).addClass("flash")`)
         .append(
           $("<input>")
             .attr("type", "radio")
@@ -76,6 +77,7 @@ $.get("/test.json", function(data) {
       //append radio 2
       $("<label>")
         .addClass("col-md-1 radio-inline rounded")
+        .attr("onclick", `$(this).addClass("flash")`)
         .append(
           $("<input>")
             .attr("type", "radio")
@@ -91,7 +93,8 @@ $.get("/test.json", function(data) {
     row.append(
       //append radio 3
       $("<label>")
-        .addClass("col-md-1 radio-inline rounded")
+        .addClass("col-md-1 radio-inline rounded flash")
+        .attr("onclick", `$(this).addClass("flash")`)
         .append(
           $("<input>")
             .attr("type", "radio")
@@ -109,6 +112,7 @@ $.get("/test.json", function(data) {
       //append radio 4
       $("<label>")
         .addClass("col-md-1 radio-inline rounded")
+        .attr("onclick", `$(this).addClass("flash")`)
         .append(
           $("<input>")
             .attr("type", "radio")
@@ -125,6 +129,7 @@ $.get("/test.json", function(data) {
       //append radio 5
       $("<label>")
         .addClass("col-md-1 radio-inline rounded")
+        .attr("onclick", `$(this).addClass("flash")`)
         .append(
           $("<input>")
             .attr("type", "radio")
@@ -165,11 +170,12 @@ $.get("/test.json", function(data) {
         row.append(
           $("<label>")
             .addClass("col-md-1 radio-inline hidesmall")
-            .html(item)
+            .append($("<p>").html(item))
         );
       });
       row.addClass("row rounded");
       display.append(row);
+      display.append("<hr>");
     }
     i++;
   });
@@ -288,14 +294,33 @@ $.get("/test.json", function(data) {
                 .css("opacity", "0");
               //end of chart
 
+              display
+                .css("background-color", "white")
+                .css("border-color", "white")
+                .removeClass("border-dark");
+
               display.append(
                 $("<div>")
-                  .html(`animal match information will go here: ${data.match}`)
+                  .html(
+                    `The animal with the closest score to your's was the ${
+                      data.match.match.name
+                    }!`
+                  )
                   .css("margin-top", "400px")
               );
+
+              const img = $("<img>");
+              img
+                .attr("src", data.match.match.imgurl)
+                .css("margin-bottom", "1600px");
+              display.append(img);
+
               console.log(data.match);
             });
           })
       )
   );
+
+  // $(".radio-inline").on("click", ()=>console.log(this));
 });
+//clickable animation

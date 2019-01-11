@@ -1,10 +1,33 @@
-.radio-inline {
-  
+#display .fixed {
+  margin: auto;
+}
+
+img{
+  width:80vmin;
+  height: 400px;
+}
+
+hr{
+  background: white;
+}
+
+.row .radio-inline {
   margin: auto;
   min-height: 64px;
+  width: 72vmax !important
+  /* background: yellow !important; */
 }
+
+.radio-inline input,
+form h4,
+.radio-inline p,
+div h1 {
+  margin: 30px auto;
+}
+
 .radio-inline:hover {
-  background-color: skyblue;
+  background-color: skyblue; 
+  
 }
 .radio-inline:active {
   animation-name: flash;
@@ -28,14 +51,24 @@
 .hidesmall {
   opacity: 1;
 }
+
+.flash {
+  animation-name:flash;
+  animation-duration: 1s;
+}
+
+
 @keyframes flash {
   50% {
     background-color: blue;
+    border-radius: 100%;
+   
   }
   100% {
     background-color: none;
-  }
-}
+    border-radius: 0%;  
+
+  }}
 @media only screen and (device-width: 768px),
   only screen and (max-width: 768px) {
   .showsmall {
